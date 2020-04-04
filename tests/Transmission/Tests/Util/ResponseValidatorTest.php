@@ -172,7 +172,7 @@ class ResponseValidatorTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($container);
     }
 
-    public function setup()
+    public function setup(): void
     {
         $this->validator = new ResponseValidator();
     }

@@ -55,7 +55,7 @@ class FileTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('foo', (string) $this->getFile());
     }
 
-    public function setup()
+    public function setup(): void
     {
         $this->file = new File();
     }

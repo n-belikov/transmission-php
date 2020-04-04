@@ -452,7 +452,7 @@ class TransmissionTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(80, $this->getTransmission()->getPort());
     }
 
-    public function setup()
+    public function setup(): void
     {
         $this->transmission = new Transmission();
     }

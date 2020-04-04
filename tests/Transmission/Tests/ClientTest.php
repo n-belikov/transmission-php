@@ -200,7 +200,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('bar', $response->foo);
     }
 
-    public function setup()
+    public function setup(): void
     {
         $this->client = new Client();
     }

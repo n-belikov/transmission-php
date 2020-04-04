@@ -136,7 +136,7 @@ class TorrentTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function setup()
+    public function setup(): void
     {
         $this->torrent = new Torrent();
     }

@@ -28,7 +28,7 @@ class PropertyMapperTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($model->getUnused());
     }
 
-    public function setup()
+    public function setup(): void
     {
         $this->mapper = new PropertyMapper();
     }

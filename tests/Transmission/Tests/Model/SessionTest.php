@@ -120,7 +120,7 @@ class SessionTest extends \PHPUnit\Framework\TestCase
         $this->getSession()->save();
     }
 
-    public function setup()
+    public function setup(): void
     {
         $this->session = new Session();
     }

@@ -40,7 +40,7 @@ class AbstractModelTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($client, $this->getModel()->getClient());
     }
 
-    public function setup()
+    public function setup(): void
     {
         $this->model = $this->getMockForAbstractClass('Transmission\Model\AbstractModel');
     }

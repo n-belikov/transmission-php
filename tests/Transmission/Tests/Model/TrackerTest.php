@@ -44,7 +44,7 @@ class TrackerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('bar', $this->getTracker()->getAnnounce());
     }
 
-    public function setup()
+    public function setup(): void
     {
         $this->tracker = new Tracker();
     }

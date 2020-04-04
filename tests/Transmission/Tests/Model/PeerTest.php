@@ -67,7 +67,7 @@ class PeerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(10000, $this->getPeer()->getDownloadRate());
     }
 
-    public function setup()
+    public function setup(): void
     {
         $this->peer = new Peer();
     }
