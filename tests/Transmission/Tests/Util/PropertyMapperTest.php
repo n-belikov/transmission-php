@@ -3,7 +3,7 @@ namespace Transmission\Tests\Util;
 
 use Transmission\Util\PropertyMapper;
 
-class PropertyMapperTest extends \PHPUnit_Framework_TestCase
+class PropertyMapperTest extends \PHPUnit\Framework\TestCase
 {
     protected $mapper;
 

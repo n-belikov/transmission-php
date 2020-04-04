@@ -5,7 +5,7 @@ use Transmission\Model\File;
 use Transmission\Util\PropertyMapper;
 
 
-class FileTest extends \PHPUnit_Framework_TestCase
+class FileTest extends \PHPUnit\Framework\TestCase
 {
     protected $file;
 

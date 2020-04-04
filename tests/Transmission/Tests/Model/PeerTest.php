@@ -4,7 +4,7 @@ namespace Transmission\Tests\Model;
 use Transmission\Model\Peer;
 use Transmission\Util\PropertyMapper;
 
-class PeerTest extends \PHPUnit_Framework_TestCase
+class PeerTest extends \PHPUnit\Framework\TestCase
 {
     protected $peer;
 

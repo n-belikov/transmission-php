@@ -5,7 +5,7 @@ use Transmission\Model\Session;
 use Transmission\Util\PropertyMapper;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
-class SessionTest extends \PHPUnit_Framework_TestCase
+class SessionTest extends \PHPUnit\Framework\TestCase
 {
     protected $session;
 

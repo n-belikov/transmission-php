@@ -3,13 +3,13 @@ namespace Transmission\Tests\Util;
 
 use Transmission\Util\ResponseValidator;
 
-class ResponseValidatorTest extends \PHPUnit_Framework_TestCase
+class ResponseValidatorTest extends \PHPUnit\Framework\TestCase
 {
     protected $validator;
 
     /**
      * @test
-     * @expectedException RuntimeException
+     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnMissingResultField()
     {
@@ -20,7 +20,7 @@ class ResponseValidatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
+     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnErrorResultField()
     {
@@ -50,7 +50,7 @@ class ResponseValidatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
+     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnMissingArgumentsInTorrentGetResponse()
     {
@@ -61,7 +61,7 @@ class ResponseValidatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
+     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnMissingTorrentArgumentInTorrentGetResponse()
     {
@@ -108,7 +108,7 @@ class ResponseValidatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
+     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnMissingArgumentsInSessionGetResponse()
     {
@@ -119,7 +119,7 @@ class ResponseValidatorTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @expectedException RuntimeException
+     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnMissingArgumentsSessionGetResponse()
     {
@@ -130,7 +130,7 @@ class ResponseValidatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
+     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnMissingArgumentsInTorrentAddResponse()
     {
@@ -141,7 +141,7 @@ class ResponseValidatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
+     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnMissingTorrentFieldArgumentInTorrentAddResponse()
     {
@@ -152,7 +152,7 @@ class ResponseValidatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
+     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnEmptyTorrentFieldInTorrentAddResponse()
     {

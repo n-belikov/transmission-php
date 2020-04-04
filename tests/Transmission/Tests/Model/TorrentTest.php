@@ -5,7 +5,7 @@ use Transmission\Model\Torrent;
 use Transmission\Util\PropertyMapper;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
-class TorrentTest extends \PHPUnit_Framework_TestCase
+class TorrentTest extends \PHPUnit\Framework\TestCase
 {
     protected $torrent;
 

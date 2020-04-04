@@ -4,7 +4,7 @@ namespace Transmission\Tests\Model;
 use Transmission\Model\Tracker;
 use Transmission\Util\PropertyMapper;
 
-class TrackerTest extends \PHPUnit_Framework_TestCase
+class TrackerTest extends \PHPUnit\Framework\TestCase
 {
     protected $tracker;
 

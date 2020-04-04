@@ -4,7 +4,7 @@ namespace Transmission\Tests;
 use Transmission\Transmission;
 use Transmission\Model\Torrent;
 
-class TransmissionTest extends \PHPUnit_Framework_TestCase
+class TransmissionTest extends \PHPUnit\Framework\TestCase
 {
     protected $transmission;
 
@@ -77,7 +77,7 @@ class TransmissionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
+     * @expectException RuntimeException
      */
     public function shouldThrowExceptionWhenTorrentIsNotFound()
     {

@@ -3,7 +3,7 @@ namespace Transmission\Tests;
 
 use Transmission\Client;
 
-class ClientTest extends \PHPUnit_Framework_TestCase
+class ClientTest extends \PHPUnit\Framework\TestCase
 {
     protected $client;
 
@@ -119,7 +119,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
+     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnExceptionDuringApiCall()
     {
@@ -134,7 +134,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
+     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnUnexpectedStatusCode()
     {
@@ -151,7 +151,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
+     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnAccessDenied()
     {

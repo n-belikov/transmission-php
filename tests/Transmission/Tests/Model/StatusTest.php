@@ -3,7 +3,7 @@ namespace Transmission\Tests\Model;
 
 use Transmission\Model\Status;
 
-class StatusTest extends \PHPUnit_Framework_TestCase
+class StatusTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
