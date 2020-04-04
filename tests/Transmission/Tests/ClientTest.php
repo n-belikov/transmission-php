@@ -119,7 +119,6 @@ class ClientTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
-     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnExceptionDuringApiCall()
     {
@@ -129,12 +128,12 @@ class ClientTest extends \PHPUnit\Framework\TestCase
             ->will($this->throwException(new \Exception()));
 
         $this->getClient()->setClient($client);
+        $this->expectException('RuntimeException');
         $this->getClient()->call('foo', array());
     }
 
     /**
      * @test
-     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnUnexpectedStatusCode()
     {
@@ -146,12 +145,12 @@ class ClientTest extends \PHPUnit\Framework\TestCase
             }));
 
         $this->getClient()->setClient($client);
+        $this->expectException('RuntimeException');
         $this->getClient()->call('foo', array());
     }
 
     /**
      * @test
-     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnAccessDenied()
     {
@@ -163,6 +162,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
             }));
 
         $this->getClient()->setClient($client);
+        $this->expectException('RuntimeException');
         $this->getClient()->call('foo', array());
     }
 

@@ -9,23 +9,23 @@ class ResponseValidatorTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
-     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnMissingResultField()
     {
         $response = (object) array();
 
+        $this->expectException('RuntimeException');
         $this->getValidator()->validate('', $response);
     }
 
     /**
      * @test
-     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnErrorResultField()
     {
         $response = (object) array('result' => 'error');
 
+        $this->expectException('RuntimeException');
         $this->getValidator()->validate('', $response);
     }
 
@@ -50,23 +50,23 @@ class ResponseValidatorTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
-     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnMissingArgumentsInTorrentGetResponse()
     {
         $response = (object) array('result' => 'success');
 
+        $this->expectException('RuntimeException');
         $this->getValidator()->validate('torrent-get', $response);
     }
 
     /**
      * @test
-     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnMissingTorrentArgumentInTorrentGetResponse()
     {
         $response = (object) array('result' => 'success', 'arguments' => (object) array());
 
+        $this->expectException('RuntimeException');
         $this->getValidator()->validate('torrent-get', $response);
     }
 
@@ -108,56 +108,56 @@ class ResponseValidatorTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
-     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnMissingArgumentsInSessionGetResponse()
     {
         $response = (object) array('result' => 'success');
 
+        $this->expectException('RuntimeException');
         $this->getValidator()->validate('session-get', $response);
     }
     
     /**
      * @test
-     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnMissingArgumentsSessionGetResponse()
     {
         $response = (object) array('result' => 'success');
 
+        $this->expectException('RuntimeException');
         $this->getValidator()->validate('session-get', $response);
     }
 
     /**
      * @test
-     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnMissingArgumentsInTorrentAddResponse()
     {
         $response = (object) array('result' => 'success');
 
+        $this->expectException('RuntimeException');
         $this->getValidator()->validate('torrent-add', $response);
     }
 
     /**
      * @test
-     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnMissingTorrentFieldArgumentInTorrentAddResponse()
     {
         $response = (object) array('result' => 'success', 'arguments' => (object) array());
 
+        $this->expectException('RuntimeException');
         $this->getValidator()->validate('torrent-add', $response);
     }
 
     /**
      * @test
-     * @expectException RuntimeException
      */
     public function shouldThrowExceptionOnEmptyTorrentFieldInTorrentAddResponse()
     {
         $response = (object) array('result' => 'success', 'arguments' => (object) array('torrent-added' => array()));
 
+        $this->expectException('RuntimeException');
         $this->getValidator()->validate('torrent-add', $response);
     }
 

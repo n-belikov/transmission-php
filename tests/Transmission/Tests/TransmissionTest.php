@@ -77,7 +77,6 @@ class TransmissionTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
-     * @expectException RuntimeException
      */
     public function shouldThrowExceptionWhenTorrentIsNotFound()
     {
@@ -95,6 +94,7 @@ class TransmissionTest extends \PHPUnit\Framework\TestCase
             }));
 
         $this->getTransmission()->setClient($client);
+        $this->expectException('RuntimeException');
         $this->getTransmission()->get(1);
     }
 
