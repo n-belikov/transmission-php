@@ -1,6 +1,7 @@
 <?php
 namespace Transmission\Model;
 
+use Transmission\Client;
 use Transmission\Util\ResponseValidator;
 
 /**
@@ -394,13 +395,16 @@ class Session extends AbstractModel
 
     public function save()
     {
+        if(!$this->getClient() instanceof Client){
+            throw new \RuntimeException('No client specified to save session against');
+        }
         $arguments = array();
 
         foreach ($this->getMapping() as $key => $value) {
             $arguments[$key] = $this->{$value};
         }
 
-        if (!empty($arguments) && $this->getClient()) {
+        if (!empty($arguments)) {
             ResponseValidator::validate(
                 'session-set',
                 $this->getClient()->call('session-set', $arguments)

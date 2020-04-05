@@ -117,6 +117,7 @@ class SessionTest extends \PHPUnit\Framework\TestCase
      */
     public function shouldNotSaveWithNoClient()
     {
+        $this->expectException('RuntimeException');
         $this->getSession()->save();
     }
 
@@ -125,6 +126,9 @@ class SessionTest extends \PHPUnit\Framework\TestCase
         $this->session = new Session();
     }
 
+    /**
+     * @return Session
+     */
     protected function getSession()
     {
         return $this->session;
