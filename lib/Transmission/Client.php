@@ -101,7 +101,7 @@ class Client
      */
     public function call($method, array $arguments)
     {
-        list($request, $response) = $this->compose($method, $arguments);
+        [$request, $response] = $this->compose($method, $arguments);
 
         try {
             $this->getClient()->send($request, $response);
