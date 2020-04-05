@@ -12,7 +12,8 @@
     ],
     "require": {
         "kriswallsmith/buzz": ">=0.9 <=0.16.1",
-        "symfony/property-access": ">=2.2.1"
+        "symfony/property-access": ">=2.2.1",
+        "php": "~7.2"
     },
     "autoload": {
         "psr-0": {
