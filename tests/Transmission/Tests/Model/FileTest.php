@@ -51,7 +51,7 @@ class FileTest extends \PHPUnit\Framework\TestCase
     {
         $this->getFile()->setName('foo');
 
-        $this->assertIsString($this->getFile());
+        $this->assertIsString((string) $this->getFile());
         $this->assertEquals('foo', (string) $this->getFile());
     }
 
