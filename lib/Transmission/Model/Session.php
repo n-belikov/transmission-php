@@ -400,7 +400,7 @@ class Session extends AbstractModel
         }
         $arguments = array();
 
-        foreach ($this->getMapping() as $key => $value) {
+        foreach (self::getMapping() as $key => $value) {
             $arguments[$key] = $this->{$value};
         }
 
