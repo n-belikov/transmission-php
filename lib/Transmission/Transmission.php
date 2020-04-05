@@ -56,14 +56,12 @@ class Transmission
             array('fields' => array_keys(Torrent::getMapping()))
         );
 
-        $torrents = array_map(function ($data) use ($mapper, $client) {
+        return array_map(function ($data) use ($mapper, $client) {
             return $mapper->map(
                 new Torrent($client),
                 $data
             );
         }, $this->getValidator()->validate('torrent-get', $response));
-
-        return $torrents;
     }
 
     /**
