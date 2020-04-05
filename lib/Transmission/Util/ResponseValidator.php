@@ -94,7 +94,7 @@ class ResponseValidator
                 'Invalid response received from Transmission'
             );
         }
-        $class='Transmission\\Model\\Stats\\Stats';
+        $class=\Transmission\Model\Stats\Stats::class;
         foreach (array('cumulative-stats','current-stats') as $property) {
             if (property_exists($response->arguments,$property)) {
                 $instance=self::map($response->arguments->$property,$class);
