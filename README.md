@@ -79,7 +79,7 @@ To find out which information is contained by the torrent, check
 
 By default, the library will try to connect to `localhost:9091`. If you want to
 connect to another host or post you can pass those to the constructor of the
-`Transmission` class:
+`Transmission` class. 
 
 ```php
 <?php
@@ -93,6 +93,14 @@ $torrent  = $transmission->add(/* path to torrent */);
 
 // When you already have a torrent, you don't have to pass the client again
 $torrent->delete();
+```
+The constructor will also allow you to configure a non-standard RPC URL with its third parameter and
+a request timeout (in seconds) with its fourth  parameter. All parameters are optional:
+```php
+<?php
+use Transmission\Transmission;
+
+$transmission = new Transmission(null, null, '/transmission/some-custom-url/rpc', 10);
 ```
 
 It is also possible to pass the torrent data directly instead of using a file
@@ -111,7 +119,7 @@ authenticate using the `Client` class:
 use Transmission\Client;
 use Transmission\Transmission;
 
-$client = new Client();
+$client = new Client(); // Can take the same optional parameters for host, port, url and timeout as the Transmission class
 $client->authenticate('username', 'password');
 $transmission = new Transmission();
 $transmission->setClient($client);

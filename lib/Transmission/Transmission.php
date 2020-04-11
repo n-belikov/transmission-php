@@ -31,13 +31,14 @@ class Transmission
     /**
      * Constructor
      *
-     * @param string  $host
-     * @param integer $port
-     * @param string  $path
+     * @param string  $host The hostname or IP of the Transmission server
+     * @param integer $port The port the Transmission server is listening on
+     * @param string  $path The path to Transmission server rpc api
+     * @param integer $timeout Number of seconds after which to fail requests
      */
-    public function __construct($host = null, $port = null, $path = null)
+    public function __construct($host = null, $port = null, $path = null, $timeout = null)
     {
-        $this->setClient(new Client($host, $port, $path));
+        $this->setClient(new Client($host, $port, $path, $timeout));
         $this->setMapper(new PropertyMapper());
         $this->setValidator(new ResponseValidator());
     }

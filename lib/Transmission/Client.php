@@ -66,14 +66,19 @@ class Client
     /**
      * Constructor
      *
-     * @param string  $host The hostname of the Transmission server
+     * @param string  $host The hostname or IP of the Transmission server
      * @param integer $port The port the Transmission server is listening on
      * @param string  $path The path to Transmission server rpc api
+     * @param integer $timeout Number of seconds after which to fail requests
      */
-    public function __construct($host = null, $port = null, $path = null)
+    public function __construct($host = null, $port = null, $path = null, $timeout = null)
     {
         $this->token    = null;
         $this->client   = new Curl();
+
+        if(!is_null($timeout)){
+            $this->client->setTimeout($timeout);
+        }
 
         if ($host) $this->setHost($host);
         if ($port) $this->setPort($port);
