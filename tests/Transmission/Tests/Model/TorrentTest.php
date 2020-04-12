@@ -61,7 +61,29 @@ class TorrentTest extends \PHPUnit\Framework\TestCase
                 (object) array(),
                 (object) array(),
                 (object) array()
-            )
+            ),
+            'activityDate' => 1427583511,
+            'addedDate' =>1427583512,
+            'corruptEver' => 123,
+            'desiredAvailable' => 1234,
+            'doneDate' => 14275835103,
+            'editDate' => 14275835104,
+            'error' => 1,
+            'errorString' => 'Some error message',
+            'etaIdle' => -1,
+            'haveUnchecked' => 12,
+            'haveValid' => 123,
+            'isStalled' => true,
+            'leftUntilDone' => 1234,
+            'manualAnnounceTime' => '1427583515',
+            'metadataPercentComplete' => 1.0,
+            'peersGettingFromUs' => 2,
+            'peersSendingToUs' => 3,
+            'queuePosition' => 4,
+            'recheckProgress' => 0.0,
+            'secondsDownloading' => 543,
+            'secondsSeeding' => 123456,
+            'webseedsSendingToUs' => 0
         );
 
         PropertyMapper::map($this->getTorrent(), $source);
@@ -81,6 +103,28 @@ class TorrentTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(1, $this->getTorrent()->getFiles());
         $this->assertCount(2, $this->getTorrent()->getPeers());
         $this->assertCount(3, $this->getTorrent()->getTrackers());
+        $this->assertEquals(1427583511, $this->getTorrent()->getActivityDate());
+        $this->assertEquals(1427583512, $this->getTorrent()->getAddedDate());
+        $this->assertEquals(123, $this->getTorrent()->getCorruptEver());
+        $this->assertEquals(1234, $this->getTorrent()->getDesiredAvailable());
+        $this->assertEquals(14275835103, $this->getTorrent()->getDoneDate());
+        $this->assertEquals(14275835104, $this->getTorrent()->getEditDate());
+        $this->assertEquals(1, $this->getTorrent()->getErrorType());
+        $this->assertEquals('Some error message', $this->getTorrent()->getErrorString());
+        $this->assertEquals(-1, $this->getTorrent()->getEtaIdle());
+        $this->assertEquals(12, $this->getTorrent()->getHaveUnchecked());
+        $this->assertEquals(123, $this->getTorrent()->getHaveValid());
+        $this->assertEquals(true, $this->getTorrent()->isStalled());
+        $this->assertEquals(1234, $this->getTorrent()->getLeftUntilDone());
+        $this->assertEquals(1427583515, $this->getTorrent()->getManualAnnounceTime());
+        $this->assertEquals(1.0, $this->getTorrent()->getMetadataPercentComplete());
+        $this->assertEquals(2, $this->getTorrent()->getPeersGettingFromUs());
+        $this->assertEquals(3, $this->getTorrent()->getPeersSendingToUs());
+        $this->assertEquals(4, $this->getTorrent()->getQueuePosition());
+        $this->assertEquals(0.0, $this->getTorrent()->getRecheckProgress());
+        $this->assertEquals(543, $this->getTorrent()->getSecondsDownloading());
+        $this->assertEquals(123456, $this->getTorrent()->getSecondsSeeding());
+        $this->assertEquals(0, $this->getTorrent()->getWebseedsSendingToUs());
     }
 
     /**
@@ -141,6 +185,9 @@ class TorrentTest extends \PHPUnit\Framework\TestCase
         $this->torrent = new Torrent();
     }
 
+    /**
+     * @return Torrent
+     */
     public function getTorrent()
     {
         return $this->torrent;
