@@ -1,5 +1,7 @@
 # PHP Transmission API
-
+[![Latest Stable Version](https://poser.pugx.org/mostertb/transmission-php/v/stable)](https://packagist.org/packages/mostertb/transmission-php)
+[![Total Downloads](https://poser.pugx.org/mostertb/transmission-php/downloads)](https://packagist.org/packages/mostertb/transmission-php)
+[![License](https://poser.pugx.org/mostertb/transmission-php/license)](https://packagist.org/packages/mostertb/transmission-php)
 [![Build Status](https://travis-ci.com/mostertb/transmission-php.svg?branch=master)](https://travis-ci.com/mostertb/transmission-php)
 
 This repo contains a fork of the un-maintained [kleiram/transmission-php](https://github.com/kleiram/transmission-php)
