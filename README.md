@@ -10,12 +10,8 @@ the downloader as well as adding new torrents to the download queue.
 
 Installation is easy using [Composer](https://getcomposer.org):
 
-```json
-{
-    "require": {
-        "kleiram/transmission-php": "dev-master"
-    }
-}
+```bash
+composer require mostertb/transmission-php
 ```
 
 ## Usage
@@ -143,20 +139,13 @@ $session->save();
 
 ## Testing
 
-Testing is done using [PHPUnit](https://github.com/sebastianbergmann/phpunit). To
-test the application, you have to install the dependencies using Composer before
-running the tests:
+Testing is done using [PHPUnit](https://github.com/sebastianbergmann/phpunit). Assuming your `composer install` was done
+including development dependencies, you can run the version of PHPUnit supported by this project straight from the `vendor`
+directory:
 
 ```bash
-$ curl -s https://getcomposer.org/installer | php
-$ php composer.phar install
-$ phpunit --coverage-text
+php vendor/bin/phpunit
 ```
-
-## Integration into frameworks
-
-Currently, there's a [Symfony](https://github.com/chellem/TransmissionBundle)
-bundle in development which allows you to easily use this library within Symfony.
 
 ## Changelog
 
