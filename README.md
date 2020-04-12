@@ -2,9 +2,12 @@
 
 [![Build Status](https://travis-ci.com/mostertb/transmission-php.svg?branch=master)](https://travis-ci.com/mostertb/transmission-php)
 
-This library provides an interface to the [Transmission](http://transmissionbt.com)
-bit-torrent downloader. It provides means to get and remove torrents from
-the downloader as well as adding new torrents to the download queue.
+This repo contains a fork of the un-maintained [kleiram/transmission-php](https://github.com/kleiram/transmission-php)
+PHP Transmission RPC client library. This fork provides support for more recent versions of PHP and functionality in newer
+versions of Transmission as well as fixes to upstream issues. See the [CHANGLOG](CHANGELOG) for a full list of changes 
+
+The library provides an interface to the [Transmission](http://transmissionbt.com) bit-torrent downloader. It provides 
+means to get and remove torrents from the downloader as well as adding new torrents to the download queue.
 
 ## Installation
 
@@ -146,36 +149,6 @@ directory:
 ```bash
 php vendor/bin/phpunit
 ```
-
-## Changelog
-
-    Version     Changes
-
-    0.1.0       - Initial release
-
-    0.2.0       - Rewrote the entire public API
-
-    0.3.0       - Added support for authentication
-
-    0.4.0       - The library now requires at least PHP 5.3.2
-                - Added support for getting files downloaded by torrent
-                - Added support for getting trackers used by a torrent
-                - Added support for getting peers connected to
-                - The torrent now contains:
-                    * Whether it is finished
-                    * The up- and download rate (in bytes/s)
-                    * The size of the download (when completed)
-                    * The ETA of the download
-                    * The percentage of the download completed
-                - Made the authentication more flexible
-                - The client now sends an User-Agent header with each request
-                - Added support for starting, stopping, veryfing and
-                  requesting a reannounce of torrents
-
-    0.5.0       - Fix a bug in the authentication/authorization mechanism
-                - A whole lot of other stuff including management of the
-                  Transmission session (setting global download speed limit
-                  and toggling the speed limit among others).
 
 ## License
 

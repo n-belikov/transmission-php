@@ -1,5 +1,7 @@
 Version     Changes
 
+# Upstream Changes
+## https://github.com/kleiram/transmission-php
 0.1.0       - Initial release
 
 0.2.0       - Rewrote the entire public API
@@ -25,3 +27,21 @@ Version     Changes
             - A whole lot of other stuff including management of the
               Transmission session (setting global download speed limit
               and toggling the speed limit among others).
+
+0.5.1       - Minor fix to test suite
+
+0.5.2       - Minor fix to test suite
+
+1.0.0       - Added support for custom RPC API path
+            - Adding a duplicate torrent no longer throws an exception
+            - Fix removal of local data when removing a torrent
+            - Documentation updates
+
+# Fork Changes
+1.1.0       - Upgraded library and dependencies to support PHP 7. Library no requires at least PHP 7.2
+            - Upgraded Test Suite to support PHPUnit 8
+            - Added support for configuring HTTP timeouts between the library and Transmission client
+            - Added support for all torrent stats cached in the transmission tr_stat struct as of Transmission 2.94 (22 new fields on the Torrent class)
+            - Fixed loose version constraint on kriswallsmith/buzz causing installs with versions > 0.16.1 to fail
+            - Saving a session that is not backed by a Transmission Client now throws an exception rather than failing silently
+
