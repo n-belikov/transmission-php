@@ -16,6 +16,11 @@ class Client
     /**
      * @var string
      */
+    const DEFAULT_SCHEME = 'http';
+
+    /**
+     * @var string
+     */
     const DEFAULT_HOST = 'localhost';
 
     /**
@@ -32,6 +37,11 @@ class Client
      * @var string
      */
     const TOKEN_HEADER = 'X-Transmission-Session-Id';
+
+    /**
+     * @var string
+     */
+    protected $scheme = self::DEFAULT_SCHEME;
 
     /**
      * @var string
@@ -66,7 +76,7 @@ class Client
     /**
      * Constructor
      *
-     * @param string  $host The hostname or IP of the Transmission server
+     * @param string  $host The hostname or IP of the Transmission server, or a full URL
      * @param integer $port The port the Transmission server is listening on
      * @param string  $path The path to Transmission server rpc api
      * @param integer $timeout Number of seconds after which to fail requests
@@ -80,7 +90,23 @@ class Client
             $this->client->setTimeout($timeout);
         }
 
-        if ($host) $this->setHost($host);
+        if ($host) {
+          // Check if the host is actually a URL
+          if(strpos($host, ':') !== FALSE) {
+            $urlscheme = parse_url($host, PHP_URL_SCHEME);
+            $urlhost = parse_url($host, PHP_URL_HOST);
+            $urlport = parse_url($host, PHP_URL_PORT);
+            $urlpath = parse_url($host, PHP_URL_PATH);
+
+            if($urlscheme) $this->setScheme($urlscheme);
+            if($urlhost) $this->setHost($urlhost);
+            if($urlport) $this->setPort($urlport);
+            if($urlpath) $this->setPath($urlpath);
+          } else {
+            $this->setHost($host);
+          }
+        }
+
         if ($port) $this->setPort($port);
         if ($path) $this->setPath($path);
     }
@@ -129,10 +155,31 @@ class Client
     public function getUrl()
     {
         return sprintf(
-            'http://%s:%d',
+            '%s://%s:%d',
+            $this->getScheme(),
             $this->getHost(),
             $this->getPort()
         );
+    }
+
+    /**
+     * Set the scheme of the Transmission server
+     *
+     * @param string $scheme
+     */
+    public function setScheme($scheme)
+    {
+        $this->scheme = (string) $scheme;
+    }
+
+    /**
+     * Get the scheme of the Transmission server
+     *
+     * @return string
+     */
+    public function getScheme()
+    {
+        return $this->scheme;
     }
 
     /**
