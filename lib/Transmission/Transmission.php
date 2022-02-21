@@ -1,4 +1,5 @@
 <?php
+
 namespace Transmission;
 
 use Transmission\Model\Torrent;
@@ -31,9 +32,9 @@ class Transmission
     /**
      * Constructor
      *
-     * @param string  $host The hostname or IP of the Transmission server
+     * @param string $host The hostname or IP of the Transmission server
      * @param integer $port The port the Transmission server is listening on
-     * @param string  $path The path to Transmission server rpc api
+     * @param string $path The path to Transmission server rpc api
      * @param integer $timeout Number of seconds after which to fail requests
      */
     public function __construct($host = null, $port = null, $path = null, $timeout = null)
@@ -54,7 +55,7 @@ class Transmission
         $mapper   = $this->getMapper();
         $response = $this->getClient()->call(
             'torrent-get',
-            array('fields' => array_keys(Torrent::getMapping()))
+            array ('fields' => array_keys(Torrent::getMapping()))
         );
 
         return array_map(function ($data) use ($mapper, $client) {
@@ -68,7 +69,7 @@ class Transmission
     /**
      * Get a specific torrent from the download queue
      *
-     * @param  integer                    $id
+     * @param integer $id
      * @return Torrent
      * @throws \RuntimeException
      */
@@ -76,9 +77,9 @@ class Transmission
     {
         $client   = $this->getClient();
         $mapper   = $this->getMapper();
-        $response = $this->getClient()->call('torrent-get', array(
+        $response = $this->getClient()->call('torrent-get', array (
             'fields' => array_keys(Torrent::getMapping()),
-            'ids'    => array($id)
+            'ids'    => array ($id)
         ));
 
         $torrent = array_reduce(
@@ -103,7 +104,7 @@ class Transmission
     {
         $response = $this->getClient()->call(
             'session-get',
-            array()
+            array ()
         );
 
         return $this->getMapper()->map(
@@ -119,7 +120,7 @@ class Transmission
     {
         $response = $this->getClient()->call(
             'session-stats',
-            array()
+            array ()
         );
 
         return $this->getMapper()->map(
@@ -130,17 +131,17 @@ class Transmission
 
     /**
      * Get Free space
-     * @param  string $path
+     * @param string $path
      * @return FreeSpace
      */
-    public function getFreeSpace($path=null)
+    public function getFreeSpace($path = null)
     {
         if (!$path) {
             $path = $this->getSession()->getDownloadDir();
         }
         $response = $this->getClient()->call(
             'free-space',
-            array('path'=>$path)
+            array ('path' => $path)
         );
 
         return $this->getMapper()->map(
@@ -152,17 +153,17 @@ class Transmission
     /**
      * Add a torrent to the download queue
      *
-     * @param  string   $torrent
-     * @param  boolean  $metainfo
-     * @param  string   $savepath
+     * @param string $torrent
+     * @param boolean $metainfo
+     * @param string $savepath
      * @return Torrent
      */
     public function add($torrent, $metainfo = false, $savepath = null)
     {
-        $parameters = array($metainfo ? 'metainfo' : 'filename' => $torrent);
+        $parameters = array ($metainfo ? 'metainfo' : 'filename' => $torrent);
 
         if ($savepath !== null) {
-            $parameters['download-dir'] = (string) $savepath;
+            $parameters['download-dir'] = (string)$savepath;
         }
 
         $response = $this->getClient()->call(
@@ -180,13 +181,13 @@ class Transmission
      * Start the download of a torrent
      *
      * @param Torrent $torrent
-     * @param bool    $now
+     * @param bool $now
      */
     public function start(Torrent $torrent, $now = false)
     {
         $this->getClient()->call(
             $now ? 'torrent-start-now' : 'torrent-start',
-            array('ids' => array($torrent->getId()))
+            array ('ids' => array ($torrent->getId()))
         );
     }
 
@@ -199,7 +200,7 @@ class Transmission
     {
         $this->getClient()->call(
             'torrent-stop',
-            array('ids' => array($torrent->getId()))
+            array ('ids' => array ($torrent->getId()))
         );
     }
 
@@ -212,7 +213,7 @@ class Transmission
     {
         $this->getClient()->call(
             'torrent-verify',
-            array('ids' => array($torrent->getId()))
+            array ('ids' => array ($torrent->getId()))
         );
     }
 
@@ -225,7 +226,7 @@ class Transmission
     {
         $this->getClient()->call(
             'torrent-reannounce',
-            array('ids' => array($torrent->getId()))
+            array ('ids' => array ($torrent->getId()))
         );
     }
 
@@ -236,7 +237,7 @@ class Transmission
      */
     public function remove(Torrent $torrent, $localData = false)
     {
-        $arguments = array('ids' => array($torrent->getId()));
+        $arguments = array ('ids' => array ($torrent->getId()));
 
         if ($localData) {
             $arguments['delete-local-data'] = true;

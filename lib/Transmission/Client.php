@@ -1,4 +1,5 @@
 <?php
+
 namespace Transmission;
 
 use Buzz\Message\Request;
@@ -76,39 +77,51 @@ class Client
     /**
      * Constructor
      *
-     * @param string  $host The hostname or IP of the Transmission server, or a full URL
+     * @param string $host The hostname or IP of the Transmission server, or a full URL
      * @param integer $port The port the Transmission server is listening on
-     * @param string  $path The path to Transmission server rpc api
+     * @param string $path The path to Transmission server rpc api
      * @param integer $timeout Number of seconds after which to fail requests
      */
     public function __construct($host = null, $port = null, $path = null, $timeout = null)
     {
-        $this->token    = null;
-        $this->client   = new Curl();
+        $this->token  = null;
+        $this->client = new Curl();
 
-        if(!is_null($timeout)){
+        if (!is_null($timeout)) {
             $this->client->setTimeout($timeout);
         }
 
         if ($host) {
-          // Check if the host is actually a URL
-          if(strpos($host, ':') !== FALSE) {
-            $urlscheme = parse_url($host, PHP_URL_SCHEME);
-            $urlhost = parse_url($host, PHP_URL_HOST);
-            $urlport = parse_url($host, PHP_URL_PORT);
-            $urlpath = parse_url($host, PHP_URL_PATH);
+            // Check if the host is actually a URL
+            if (strpos($host, ':') !== FALSE) {
+                $urlscheme = parse_url($host, PHP_URL_SCHEME);
+                $urlhost   = parse_url($host, PHP_URL_HOST);
+                $urlport   = parse_url($host, PHP_URL_PORT);
+                $urlpath   = parse_url($host, PHP_URL_PATH);
 
-            if($urlscheme) $this->setScheme($urlscheme);
-            if($urlhost) $this->setHost($urlhost);
-            if($urlport) $this->setPort($urlport);
-            if($urlpath) $this->setPath($urlpath);
-          } else {
-            $this->setHost($host);
-          }
+                if ($urlscheme) {
+                    $this->setScheme($urlscheme);
+                }
+                if ($urlhost) {
+                    $this->setHost($urlhost);
+                }
+                if ($urlport) {
+                    $this->setPort($urlport);
+                }
+                if ($urlpath) {
+                    $this->setPath($urlpath);
+                }
+            } else {
+                $this->setHost($host);
+            }
         }
 
-        if ($port) $this->setPort($port);
-        if ($path) $this->setPath($path);
+        if ($port) {
+            $this->setPort($port);
+        }
+        if ($path) {
+            $this->setPath($path);
+        }
     }
 
     /**
@@ -119,14 +132,14 @@ class Client
      */
     public function authenticate($username, $password)
     {
-        $this->auth = base64_encode($username .':'. $password);
+        $this->auth = base64_encode($username.':'.$password);
     }
 
     /**
      * Make an API call
      *
-     * @param  string           $method
-     * @param  array            $arguments
+     * @param string $method
+     * @param array $arguments
      * @return \stdClass
      * @throws \RuntimeException
      */
@@ -169,7 +182,7 @@ class Client
      */
     public function setScheme($scheme)
     {
-        $this->scheme = (string) $scheme;
+        $this->scheme = (string)$scheme;
     }
 
     /**
@@ -189,7 +202,7 @@ class Client
      */
     public function setHost($host)
     {
-        $this->host = (string) $host;
+        $this->host = (string)$host;
     }
 
     /**
@@ -209,7 +222,7 @@ class Client
      */
     public function setPort($port)
     {
-        $this->port = (integer) $port;
+        $this->port = (integer)$port;
     }
 
     /**
@@ -229,7 +242,7 @@ class Client
      */
     public function setPath($path)
     {
-        return $this->path = (string) $path;
+        return $this->path = (string)$path;
     }
 
     /**
@@ -247,7 +260,7 @@ class Client
      */
     public function setToken($token)
     {
-        $this->token = (string) $token;
+        $this->token = (string)$token;
     }
 
     /**
@@ -289,7 +302,7 @@ class Client
     {
         $request = new Request('POST', $this->getPath(), $this->getUrl());
         $request->addHeader(sprintf('%s: %s', self::TOKEN_HEADER, $this->getToken()));
-        $request->setContent(json_encode(array(
+        $request->setContent(json_encode(array (
             'method'    => $method,
             'arguments' => $arguments
         )));
@@ -298,19 +311,19 @@ class Client
             $request->addHeader(sprintf('Authorization: Basic %s', $this->auth));
         }
 
-        return array($request, new Response());
+        return array ($request, new Response());
     }
 
     /**
-     * @param  Response $response
-     * @param  string                $method
-     * @param  array                 $arguments
+     * @param Response $response
+     * @param string $method
+     * @param array $arguments
      * @return \stdClass
      * @throws \RuntimeException
      */
     protected function validateResponse($response, $method, $arguments)
     {
-        if (!in_array($response->getStatusCode(), array(200, 401, 409))) {
+        if (!in_array($response->getStatusCode(), array (200, 401, 409))) {
             throw new \RuntimeException('Unexpected response received from Transmission');
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace Transmission\Util;
 
 /**
@@ -7,8 +8,8 @@ namespace Transmission\Util;
 class ResponseValidator
 {
     /**
-     * @param  string    $method
-     * @param  \stdClass $response
+     * @param string $method
+     * @param \stdClass $response
      * @return \stdClass
      */
     public static function validate($method, \stdClass $response)
@@ -17,7 +18,7 @@ class ResponseValidator
             throw new \RuntimeException('Invalid response received from Transmission');
         }
 
-        if (!in_array($response->result, array('success', 'duplicate torrent'))) {
+        if (!in_array($response->result, array ('success', 'duplicate torrent'))) {
             throw new \RuntimeException(sprintf(
                 'An error occured: "%s"', $response->result
             ));
@@ -38,7 +39,7 @@ class ResponseValidator
     }
 
     /**
-     * @param  \stdClass         $response
+     * @param \stdClass $response
      * @throws \RuntimeException
      */
     public static function validateGetResponse(\stdClass $response)
@@ -54,12 +55,12 @@ class ResponseValidator
     }
 
     /**
-     * @param  \stdClass         $response
+     * @param \stdClass $response
      * @throws \RuntimeException
      */
     public static function validateAddResponse(\stdClass $response)
     {
-        $fields = array('torrent-added', 'torrent-duplicate');
+        $fields = array ('torrent-added', 'torrent-duplicate');
 
         foreach ($fields as $field) {
             if (isset($response->arguments) &&
@@ -84,7 +85,7 @@ class ResponseValidator
     }
 
     /**
-     * @param  \stdClass $response
+     * @param \stdClass $response
      * @return \stdClass
      */
     public static function validateSessionStatsGetResponse(\stdClass $response)
@@ -94,20 +95,20 @@ class ResponseValidator
                 'Invalid response received from Transmission'
             );
         }
-        $class=\Transmission\Model\Stats\Stats::class;
-        foreach (array('cumulative-stats','current-stats') as $property) {
-            if (property_exists($response->arguments,$property)) {
-                $instance=self::map($response->arguments->$property,$class);
-                $response->arguments->$property=$instance;
+        $class = \Transmission\Model\Stats\Stats::class;
+        foreach (array ('cumulative-stats', 'current-stats') as $property) {
+            if (property_exists($response->arguments, $property)) {
+                $instance                       = self::map($response->arguments->$property, $class);
+                $response->arguments->$property = $instance;
             }
         }
 
         return $response->arguments;
     }
 
-    private static function map($object,$class)
+    private static function map($object, $class)
     {
-        return PropertyMapper::map(new $class(),$object);
+        return PropertyMapper::map(new $class(), $object);
 
     }
 
