@@ -1,5 +1,5 @@
 {
-    "name": "mostertb/transmission-php",
+    "name": "n-belikov/transmission-php",
     "description": "Fork of unmaintained kleiram/transmission-php PHP Transmission RPC client library",
     "keywords": ["transmission", "torrent", "download"],
     "type": "library",
