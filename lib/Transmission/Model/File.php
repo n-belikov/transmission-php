@@ -96,6 +96,7 @@ class File extends AbstractModel
     public static function getMapping(): array
     {
         return [
+            'id'             => 'id',
             'name'           => 'name',
             'length'         => 'size',
             'bytesCompleted' => 'completed'
