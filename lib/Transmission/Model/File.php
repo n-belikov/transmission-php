@@ -1,4 +1,5 @@
 <?php
+
 namespace Transmission\Model;
 
 /**
@@ -6,6 +7,8 @@ namespace Transmission\Model;
  */
 class File extends AbstractModel
 {
+    protected $id;
+
     /**
      * @var string
      */
@@ -21,18 +24,28 @@ class File extends AbstractModel
      */
     protected $completed;
 
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
-        $this->name = (string) $name;
+        $this->name = $name;
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -40,15 +53,15 @@ class File extends AbstractModel
     /**
      * @param integer $size
      */
-    public function setSize($size)
+    public function setSize(int $size): void
     {
-        $this->size = (integer) $size;
+        $this->size = $size;
     }
 
     /**
      * @return integer
      */
-    public function getSize()
+    public function getSize(): int
     {
         return $this->size;
     }
@@ -56,15 +69,15 @@ class File extends AbstractModel
     /**
      * @param integer $size
      */
-    public function setCompleted($completed)
+    public function setCompleted(int $completed): void
     {
-        $this->completed = (integer) $completed;
+        $this->completed = $completed;
     }
 
     /**
      * @return integer
      */
-    public function getCompleted()
+    public function getCompleted(): int
     {
         return $this->completed;
     }
@@ -72,7 +85,7 @@ class File extends AbstractModel
     /**
      * @return boolean
      */
-    public function isDone()
+    public function isDone(): bool
     {
         return $this->getSize() == $this->getCompleted();
     }
@@ -80,16 +93,16 @@ class File extends AbstractModel
     /**
      * {@inheritDoc}
      */
-    public static function getMapping()
+    public static function getMapping(): array
     {
-        return array(
-            'name' => 'name',
-            'length' => 'size',
+        return [
+            'name'           => 'name',
+            'length'         => 'size',
             'bytesCompleted' => 'completed'
-        );
+        ];
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->name;
     }

@@ -2,6 +2,8 @@
 
 namespace Transmission;
 
+use Transmission\Model\File;
+use Transmission\Model\ModelInterface;
 use Transmission\Model\Torrent;
 use Transmission\Model\Session;
 use Transmission\Model\FreeSpace;
@@ -156,7 +158,7 @@ class Transmission
      * @param string $torrent
      * @param boolean $metainfo
      * @param string $savepath
-     * @return Torrent
+     * @return Torrent|ModelInterface
      */
     public function add($torrent, $metainfo = false, $savepath = null)
     {
@@ -183,7 +185,7 @@ class Transmission
      * @param Torrent $torrent
      * @param bool $now
      */
-    public function start(Torrent $torrent, $now = false)
+    public function start(Torrent $torrent, bool $now = false): void
     {
         $this->getClient()->call(
             $now ? 'torrent-start-now' : 'torrent-start',
@@ -205,11 +207,43 @@ class Transmission
     }
 
     /**
+     * Stop the download of a torrent
+     *
+     * @param Torrent $torrent
+     */
+    public function stopFile(Torrent $torrent, File $file): void
+    {
+        $this->getClient()->call(
+            'torrent-set',
+            [
+                'ids'            => [$torrent->getId()],
+                'files-unwanted' => [$file->getId()]
+            ]
+        );
+    }
+
+    /**
+     * Stop the download of a torrent
+     *
+     * @param Torrent $torrent
+     */
+    public function startFile(Torrent $torrent, File $file): void
+    {
+        $this->getClient()->call(
+            'torrent-set',
+            [
+                'ids'          => [$torrent->getId()],
+                'files-wanted' => [$file->getId()]
+            ]
+        );
+    }
+
+    /**
      * Verify the download of a torrent
      *
      * @param Torrent $torrent
      */
-    public function verify(Torrent $torrent)
+    public function verify(Torrent $torrent): void
     {
         $this->getClient()->call(
             'torrent-verify',
@@ -222,7 +256,7 @@ class Transmission
      *
      * @param Torrent $torrent
      */
-    public function reannounce(Torrent $torrent)
+    public function reannounce(Torrent $torrent): void
     {
         $this->getClient()->call(
             'torrent-reannounce',
@@ -235,7 +269,7 @@ class Transmission
      *
      * @param Torrent $torrent
      */
-    public function remove(Torrent $torrent, $localData = false)
+    public function remove(Torrent $torrent, bool $localData = false): void
     {
         $arguments = array ('ids' => array ($torrent->getId()));
 
@@ -251,7 +285,7 @@ class Transmission
      *
      * @param Client $client
      */
-    public function setClient(Client $client)
+    public function setClient(Client $client): void
     {
         $this->client = $client;
     }
@@ -261,7 +295,7 @@ class Transmission
      *
      * @return Client
      */
-    public function getClient()
+    public function getClient(): Client
     {
         return $this->client;
     }
@@ -271,7 +305,7 @@ class Transmission
      *
      * @param string $host
      */
-    public function setHost($host)
+    public function setHost(string $host): void
     {
         $this->getClient()->setHost($host);
     }
@@ -281,7 +315,7 @@ class Transmission
      *
      * @return string
      */
-    public function getHost()
+    public function getHost(): string
     {
         return $this->getClient()->getHost();
     }
@@ -291,7 +325,7 @@ class Transmission
      *
      * @param integer $port
      */
-    public function setPort($port)
+    public function setPort(int $port): void
     {
         $this->getClient()->setPort($port);
     }
@@ -301,7 +335,7 @@ class Transmission
      *
      * @return integer
      */
-    public function getPort()
+    public function getPort(): int
     {
         return $this->getClient()->getPort();
     }
@@ -311,7 +345,7 @@ class Transmission
      *
      * @param PropertyMapper $mapper
      */
-    public function setMapper(PropertyMapper $mapper)
+    public function setMapper(PropertyMapper $mapper): void
     {
         $this->mapper = $mapper;
     }
@@ -321,7 +355,7 @@ class Transmission
      *
      * @return PropertyMapper
      */
-    public function getMapper()
+    public function getMapper(): PropertyMapper
     {
         return $this->mapper;
     }
@@ -331,7 +365,7 @@ class Transmission
      *
      * @param ResponseValidator $validator
      */
-    public function setValidator(ResponseValidator $validator)
+    public function setValidator(ResponseValidator $validator): void
     {
         $this->validator = $validator;
     }
@@ -341,7 +375,7 @@ class Transmission
      *
      * @return ResponseValidator
      */
-    public function getValidator()
+    public function getValidator(): ResponseValidator
     {
         return $this->validator;
     }
